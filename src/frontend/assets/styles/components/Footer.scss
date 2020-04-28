@@ -1,0 +1,34 @@
+.footer {
+    background: linear-gradient(90deg, $primary-gradient, $secondary-gradient);
+    padding: $font-size * 2;
+    .social-media,
+    .posts {
+        h4 {
+            padding-bottom: $font-size / 2;
+            margin-bottom: $font-size;
+            border-bottom: solid 1px white;
+            font-size: $font-size * 1.5;
+            text-align: center;
+            color: white;
+        }
+    }
+}
+
+@media screen and (min-width: 680px) {
+    .footer {
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: $font-size * 4;
+        }
+        .social-media,
+        .posts {
+            h4 {
+                text-align: left;
+            }
+            .icons {
+                justify-content: start;
+            }
+        }
+    }
+}

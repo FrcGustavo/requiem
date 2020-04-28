@@ -1,0 +1,55 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: $font-size;
+}
+
+body {
+    overflow: hidden;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+#app {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+@mixin shadow {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16);
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.btn {
+    @include shadow;
+    border-radius: $font-size / 2;
+    padding: $font-size / 2 $font-size;
+    text-transform: uppercase;
+    &-primary {
+        background-color: $secondary-dark;
+        color: white;
+    }
+    &-secondary {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: white;
+    }
+}
+
+a.btn {
+    display: inline-block;
+}
