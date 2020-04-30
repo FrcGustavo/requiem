@@ -41,7 +41,7 @@ Post.propTypes = {
       slug: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  currentPost: PropTypes.objectOf(PropTypes.string).isRequired,
+  currentPost: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 const mapStateToProps = (state) => ({

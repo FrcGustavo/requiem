@@ -19,8 +19,9 @@ if (config.server.env === 'development') {
 
 app.get('/', MainController.index);
 app.get('/blog', BlogController.index);
-app.get('/not-found', MainController.Error404);
-app.get('/:slug', BlogController.show);
+app.get('/blog/:slug', BlogController.show);
+
+app.use(MainController.Error404);
 
 app.listen(config.server.port, () => {
   console.log(`Server is listening on http://localhost:${config.server.port}`);
