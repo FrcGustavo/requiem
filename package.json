@@ -30,7 +30,7 @@
         "helmet": "^3.22.0",
         "history": "^4.10.1",
         "ignore-styles": "^5.0.1",
-        "node-fetch": "^2.6.0",
+        "mongodb": "^3.5.7",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
@@ -39,6 +39,7 @@
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.1.2",
         "redux": "^4.0.5",
+        "showdown": "^1.9.1",
         "webpack": "^4.42.1"
     },
     "devDependencies": {

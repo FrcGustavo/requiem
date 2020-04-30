@@ -1,12 +1,13 @@
-import fetch from 'node-fetch';
+import PostsServices from '../services/PostsServices';
 import initialState from '../initialState';
 import renderApp from '../utils/renderApp';
-import config from '../config';
+
+const posts = new PostsServices();
 
 const index = async (req, res, next) => {
   try {
-    const api = await (await fetch(`${config.apiUrl}/posts?limit=1`)).json();
-    const state = { ...initialState, mainPost: api.data[0] };
+    const post = await posts.find({ limit: 1 });
+    const state = { ...initialState, mainPost: post[0] };
     const html = renderApp(state, req.url, req.hasManifest, {
       title: 'FrcGustavo',
       description: 'Hola soy Gustavo, desarrollador con JavaScript, me gusta aprender cosas nuevas todos los dias',

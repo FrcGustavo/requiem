@@ -1,44 +1,45 @@
-import fetch from 'node-fetch';
+import PostsServices from '../services/PostsServices';
 import initialState from '../initialState';
 import renderApp from '../utils/renderApp';
-import config from '../config';
 
-const index = async (req, res, next) => {
-  try {
-    const api = await (await fetch(`${config.apiUrl}/posts`)).json();
-    const state = { ...initialState, blog: api.data };
-    const html = renderApp(state, req.url, req.hasManifest, {
-      title: 'FrcGustavo | Blog',
-      description: 'Hola yo soy gustavo y en este blog encontraras',
-      keywords: 'FrcGustavo',
-    });
-    res.send(html);
-  } catch (error) {
-    next(error);
+class BlogController {
+  constructor() {
+    this.posts = new PostsServices();
+    this.index = this.index.bind(this);
+    this.show = this.show.bind(this);
   }
-};
 
-const show = async (req, res, next) => {
-  const { slug } = req.params;
-  try {
-    const api = await fetch(`${config.apiUrl}/posts/${slug}`);
-    if (api.status === 200) {
-      const dataJSON = await api.json();
-      const state = { ...initialState, currentPost: dataJSON.data };
+  async index(req, res, next) {
+    const { limit, sort, page } = req.query;
+    try {
+      const posts = await this.posts.find({ limit, sort, page });
+      const state = { ...initialState, blog: posts };
       const html = renderApp(state, req.url, req.hasManifest, {
-        title: dataJSON.data.title,
-        description: dataJSON.data.description,
-        keywords: '',
+        title: 'FrcGustavo | Blog',
+        description: 'Hola yo soy gustavo y en este blog encontraras',
+        keywords: 'FrcGustavo',
       });
       res.send(html);
+    } catch (error) {
+      next(error);
     }
-    res.redirect('/not-found');
-  } catch (error) {
-    next(error);
   }
-};
 
-export default {
-  index,
-  show,
-};
+  async show(req, res, next) {
+    const { slug } = req.params;
+    try {
+      const post = await this.posts.show(slug);
+      const state = { ...initialState, currentPost: post };
+      const html = renderApp(state, req.url, req.hasManifest, {
+        title: post.title,
+        description: post.description,
+        keywords: post.keywords,
+      });
+      res.send(html);
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+export default new BlogController();
