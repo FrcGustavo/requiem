@@ -8,7 +8,7 @@ const index = async (req, res, next) => {
   try {
     const post = await posts.find({ limit: 1 });
     const state = { ...initialState, mainPost: post[0] };
-    const html = renderApp(state, req.url, req.hasManifest, {
+    const html = renderApp(state, req.url, req.hashManifest, {
       title: 'FrcGustavo',
       description: 'Hola soy Gustavo, desarrollador con JavaScript, me gusta aprender cosas nuevas todos los dias',
       keywords: 'FrcGustavo, Blog, Desarrollador, JavaScript, Frontend, Backend',
@@ -21,7 +21,7 @@ const index = async (req, res, next) => {
 
 const Error404 = async (req, res) => {
   const state = { ...initialState };
-  const html = renderApp(state, req.url, req.hasManifest, {
+  const html = renderApp(state, req.url, req.hashManifest, {
     title: 'Not Found',
     description: '',
     keywords: '',

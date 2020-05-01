@@ -14,7 +14,7 @@ class BlogController {
     try {
       const posts = await this.posts.find({ limit, sort, page });
       const state = { ...initialState, blog: posts };
-      const html = renderApp(state, req.url, req.hasManifest, {
+      const html = renderApp(state, req.url, req.hashManifest, {
         title: 'FrcGustavo | Blog',
         description: 'Hola yo soy gustavo y en este blog encontraras',
         keywords: 'FrcGustavo',
@@ -30,7 +30,7 @@ class BlogController {
     try {
       const post = await this.posts.show(slug);
       const state = { ...initialState, currentPost: post };
-      const html = renderApp(state, req.url, req.hasManifest, {
+      const html = renderApp(state, req.url, req.hashManifest, {
         title: post.title,
         description: post.description,
         keywords: post.keywords,

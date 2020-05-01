@@ -17,6 +17,8 @@ if (config.server.env === 'development') {
   loadConfigProd(app);
 }
 
+app.use(express.static(`${__dirname}/public`));
+
 app.get('/', MainController.index);
 app.get('/blog', BlogController.index);
 app.get('/blog/:slug', BlogController.show);
