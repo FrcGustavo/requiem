@@ -1,6 +1,6 @@
 const setResponse = (html, state, manifest, metaTags) => {
-  const mainStyles = manifest ? manifest['main.css'] : 'assets/app.css';
-  const mainBuild = manifest ? manifest['main.js'] : 'assets/app.js';
+  const mainStyles = manifest ? manifest['main.css'] : '/assets/app.css';
+  const mainBuild = manifest ? manifest['main.js'] : '/assets/app.js';
   return (`
     <!DOCTYPE html>
     <html lang="es">

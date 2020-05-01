@@ -8,7 +8,7 @@ const CardPost = ({ post }) => (
     <div className="card-info">
       <h1>{post.title}</h1>
       <p>{post.description}</p>
-      <Link className="btn btn-primary" to={`/${post.slug}`}>Leer más</Link>
+      <Link className="btn btn-primary" to={`/blog/${post.slug}`}>Leer más</Link>
     </div>
   </article>
 );

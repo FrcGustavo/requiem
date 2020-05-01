@@ -4,22 +4,26 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import Loading from '../components/Loading';
 import GithubIcon from '../components/icons/GithubIcon';
 import TwitterIcon from '../components/icons/TwitterIcon';
 import LinkedinIcon from '../components/icons/LinkedinIcon';
 import config from '../config';
 
-const frcgustavo = 'https://firebasestorage.googleapis.com/v0/b/frcgustavo-849f3.appspot.com/o/me.png?alt=media&token=898a5729-4489-4ecc-b8fb-7079edcf9a98';
+const frcgustavo = 'https://firebasestorage.googleapis.com/v0/b/frcgustavo-8b73e.appspot.com/o/frcgustavo.jpg?alt=media&token=bd3682ec-e6f8-4643-9830-9d2d2d665daa';
 const Home = ({ mainPost }) => {
   const [post, setPost] = useState(mainPost);
+  const [error, setError] = useState(false);
   useEffect(() => {
     if (!post) {
       fetch(`${config.api}/posts?limit=1`)
         .then((res) => res.json())
-        .then((json) => setPost(json.data[0]));
+        .then((json) => setPost(json.data.posts[0]))
+        .catch(() => setError(true));
     }
   });
-  if (!post) return <div>Cargando</div>;
+  if (error) return <div>Upss Algo salio mal</div>;
+  if (!post) return <Loading />;
   return (
     <div className="home">
       <section className="home-info container">
@@ -31,9 +35,15 @@ const Home = ({ mainPost }) => {
           <h2>Desarrollador JavaScript Frontend | Backend</h2>
           <p>Hola yo soy Gustavo y me ecataria que me acompañes en esta aventura de constante aprendisaje</p>
           <div className="icons home-icons">
-            <GithubIcon />
-            <TwitterIcon />
-            <LinkedinIcon />
+            <Link to="https://github.com/FranciscoGustavo" target="_blank">
+              <GithubIcon />
+            </Link>
+            <Link to="https://twitter.com/frcgustavo" target="_blank">
+              <TwitterIcon />
+            </Link>
+            <Link to="https://www.linkedin.com/in/frcgustavo/" target="_blank">
+              <LinkedinIcon />
+            </Link>
           </div>
         </div>
       </section>
@@ -43,7 +53,7 @@ const Home = ({ mainPost }) => {
           <div className="card-post-info">
             <h3>{post.title}</h3>
             <p>{post.description}</p>
-            <Link to={post.slug} className="btn btn-primary">Leer más</Link>
+            <Link to={`/blog/${post.slug}`} className="btn btn-primary">Leer más</Link>
           </div>
         </article>
       </section>
