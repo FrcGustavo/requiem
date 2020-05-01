@@ -1,19 +1,28 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import CardPost from '../components/CardPost';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 
-const Blog = ({ blog }) => {
+import { loadBlog } from '../actions';
+
+const Blog = (props) => {
+  const { blog } = props;
+
   const [posts, setPosts] = useState(blog);
   const [error, setError] = useState(false);
   useEffect(() => {
     if (!posts) {
       fetch('http://localhost:8080/api/posts/')
         .then((res) => res.json())
-        .then((json) => setPosts(json.data.posts))
+        .then((json) => {
+          setPosts(json.data.posts);
+          props.dispatch(loadBlog(json.data.posts));
+        })
         .catch(() => setError(true));
     }
   });
@@ -50,7 +59,8 @@ const Blog = ({ blog }) => {
 };
 
 Blog.propTypes = {
-  blog: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  blog: PropTypes.any.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (

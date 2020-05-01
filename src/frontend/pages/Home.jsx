@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -8,17 +9,23 @@ import Loading from '../components/Loading';
 import GithubIcon from '../components/icons/GithubIcon';
 import TwitterIcon from '../components/icons/TwitterIcon';
 import LinkedinIcon from '../components/icons/LinkedinIcon';
+
+import { loadHome } from '../actions';
 import config from '../config';
 
 const frcgustavo = 'https://firebasestorage.googleapis.com/v0/b/frcgustavo-8b73e.appspot.com/o/frcgustavo.jpg?alt=media&token=bd3682ec-e6f8-4643-9830-9d2d2d665daa';
-const Home = ({ mainPost }) => {
+const Home = (props) => {
+  const { mainPost } = props;
   const [post, setPost] = useState(mainPost);
   const [error, setError] = useState(false);
   useEffect(() => {
     if (!post) {
       fetch(`${config.api}/posts?limit=1`)
         .then((res) => res.json())
-        .then((json) => setPost(json.data.posts[0]))
+        .then((json) => {
+          setPost(json.data.posts[0]);
+          props.dispatch(loadHome(json.data.posts[0]));
+        })
         .catch(() => setError(true));
     }
   });
@@ -62,7 +69,8 @@ const Home = ({ mainPost }) => {
 };
 
 Home.propTypes = {
-  mainPost: PropTypes.objectOf(PropTypes.string).isRequired,
+  mainPost: PropTypes.any.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
