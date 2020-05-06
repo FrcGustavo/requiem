@@ -1,4 +1,4 @@
 const config = {
-  api: 'http://localhost:8080/api',
+  api: 'https://frcgustavo-8b73e.appspot.com/api',
 };
 export default config;

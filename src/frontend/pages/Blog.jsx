@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 
 import { loadBlog } from '../actions';
+import config from '../config';
 
 const Blog = (props) => {
   const { blog } = props;
@@ -17,7 +18,7 @@ const Blog = (props) => {
   const [error, setError] = useState(false);
   useEffect(() => {
     if (!posts) {
-      fetch('http://localhost:8080/api/posts/')
+      fetch(`${config.api}/posts/`)
         .then((res) => res.json())
         .then((json) => {
           setPosts(json.data.posts);

@@ -6,7 +6,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
-const isDev = (process.env.ENV === 'development');
+const isDev = (process.env.NODE_ENV === 'development');
 const entry = ['./src/frontend/index.js'];
 if (isDev) {
   entry.push('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true');
@@ -14,7 +14,7 @@ if (isDev) {
 
 module.exports = {
   entry,
-  mode: process.env.ENV,
+  mode: process.env.NODE_ENV,
   output: {
     path: path.resolve(__dirname, 'src/server/public'),
     filename: isDev ? 'assets/app.js' : 'assets/app-[hash].js',

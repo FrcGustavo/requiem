@@ -42,15 +42,15 @@ const Home = (props) => {
           <h2>Desarrollador JavaScript Frontend | Backend</h2>
           <p>Hola yo soy Gustavo y me ecataria que me acompañes en esta aventura de constante aprendisaje</p>
           <div className="icons home-icons">
-            <Link to="https://github.com/FranciscoGustavo" target="_blank">
+            <a href="https://github.com/FranciscoGustavo" target="_blank" rel="noopener noreferrer">
               <GithubIcon />
-            </Link>
-            <Link to="https://twitter.com/frcgustavo" target="_blank">
+            </a>
+            <a href="https://twitter.com/frcgustavo" target="_blank" rel="noopener noreferrer">
               <TwitterIcon />
-            </Link>
-            <Link to="https://www.linkedin.com/in/frcgustavo/" target="_blank">
+            </a>
+            <a href="https://www.linkedin.com/in/frcgustavo/" target="_blank" rel="noopener noreferrer">
               <LinkedinIcon />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
