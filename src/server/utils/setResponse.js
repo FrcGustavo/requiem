@@ -14,6 +14,7 @@ const setResponse = (html, state, manifest, metaTags) => {
         <link rel="stylesheet" type="text/css" href="${mainStyles}"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="icon" type="image/ico" href="/favicon.ico">
         <title>${metaTags.title || 'FrcGustavo'}</title>
     </head>
     <body>
